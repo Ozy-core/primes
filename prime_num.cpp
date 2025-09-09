@@ -2,45 +2,41 @@
 #include "prime_num.hpp"
 
 int primes(int i)
- {
-    vector <int> prime_list;
-    if(i<1)
-    {
-        cout<< "This number is not prime.";
-        for(int i=0;i<prime_list.size();i++)
-        {
-            cout<< prime_list[i]<<", ";
+{
+    vector<int> prime_list;
+    int n = i;
+
+    if (i < 1) {
+        cout << "This number is not prime or has no prime factors." << endl;
+        for(int i=0; prime_list.size(); i++){
+            cout<<prime_list[i]<<endl;
         }
         return 0;
     }
-    while(i>1)
-    {
-        if(i%2==0)
-        {
-            i=i/2;
-            prime_list.push_back(2);
-        }
-        else
-        {
-            prime_list.push_back(i);
-        }
-        if(i%3==0)
-        {
-            i=i/3;
-            prime_list.push_back(3);
-        }
-        else
-        {
-            prime_list.push_back(i);
+
+    while (n % 2 == 0) {
+        prime_list.push_back(2);
+        n /= 2;
+    }
+
+    for (int factor = 3; factor * factor <= n; factor += 2) {
+        while (n % factor == 0) {
+            prime_list.push_back(factor);
+            n /= factor;
         }
     }
-    cout<< "The prime factors of your number are: ";
-    for(int i=0;i<prime_list.size();i++)
-    {
-        cout<< prime_list[i]<<", ";
+
+    if (n > 2) {
+        prime_list.push_back(n);
     }
+
+    cout << "The prime factors of your number: " << endl;
+    for (size_t j = 0; j < prime_list.size(); ++j) {
+        cout << prime_list[j] << endl;
+    }
+
     return 0;
- }
- 
+}
+
 
 
